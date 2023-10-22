@@ -1,5 +1,7 @@
 
 import javax.swing.JOptionPane;
+import java.sql.*;
+import Project.ConnectionProvider;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -42,20 +44,27 @@ public class newStudent extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(325, 125));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Student ID ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 102, 71, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 102, 100, -1));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Name");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 142, 71, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 142, 90, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Father Name");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 182, 71, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 182, 100, -1));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Course Name");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 222, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Branch Name");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 262, -1, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 99, 229, -1));
@@ -77,7 +86,7 @@ public class newStudent extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 299, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -88,7 +97,7 @@ public class newStudent extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 299, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -100,7 +109,7 @@ public class newStudent extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
       
-        String studentID=jTextFieldl.getText();
+        String studentID=jTextField1.getText();
         String name=jTextField2.getText ();
         String fatherName=jTextField3.getText();
         String courseName=(String) jComboBox1.getSelectedItem();
@@ -108,15 +117,15 @@ public class newStudent extends javax.swing.JFrame {
          try
          {
              Connection con=ConnectionProvider.getCon();
-             Statement st=con.createStatement ();
-             st.execute Update ("insert into student values ('"+studentID+"','"+name+"','"+fatherName+"','"+courseName+"','"+branchName+"')");
+             Statement st=con.createStatement();
+             st.executeUpdate ("insert into student values ('"+studentID+"','"+name+"','"+fatherName+"','"+courseName+"','"+branchName+"')");
              JOptionPane.showMessageDialog(null, "Successfully updated");
              setVisible (false);
              new newStudent ().setVisible (true);
          }
            catch (Exception e)
             {
-              JOptionPane.showMessageDialog(null, "Student Id allready exist);
+              JOptionPane.showMessageDialog(null, "Student Id allready exist");
               setVisible (false);
               new newStudent ().setVisible (true);
     }//GEN-LAST:event_jButton1ActionPerformed
